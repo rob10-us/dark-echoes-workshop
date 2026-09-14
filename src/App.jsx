@@ -12,12 +12,35 @@ function App() {
 
         <ul>
           {episodes.map((episode) => (
-            <li key={episode.id}>{episode.title}</li>
+            <li key={episode.id} onClick={() => setSelectedEpisode(episode)}>
+              {episode.title}
+            </li>
           ))}
         </ul>
       </section>
     );
   }
+
+  function EpisodeDetails() {
+    if (!selectedEpisode) {
+      return (
+        <section className="details">
+          <h2>Episode Details</h2>
+          <p>Click on an episode to learn more!</p>
+        </section>
+      );
+    }
+
+    return (
+      <section className="details">
+        <h2>Episode {selectedEpisode.id}</h2>
+        <h3>{selectedEpisode.title}</h3>
+        <p>{selectedEpisode.description}</p>
+        <button>Click to Watch Now</button>
+      </section>
+    );
+  }
+
   return (
     <>
       <header>
@@ -26,6 +49,7 @@ function App() {
 
       <main>
         <EpisodeList />
+        <EpisodeDetails />
       </main>
     </>
   );
